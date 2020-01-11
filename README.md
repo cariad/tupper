@@ -1,6 +1,6 @@
 # Tupper's Self-Referential Formula plotter
 
-This script plots Tupper's Self-Referential Formula for *(0 ≤ x < 106, k ≤ y < k + 17)*.
+This Python package plots Tupper's Self-Referential Formula for *(0 ≤ x < 106, k ≤ y < k + 17)*.
 
 If you don't specify *k* then *k* =
 
@@ -44,10 +44,16 @@ https://www.youtube.com/watch?v=_s5RFgd59ao
 
 - Python 3
 
-## Usage
+## Installation
 
 ```shell
-python3 console.py
+pip3 install tupper
+```
+
+## Console usage
+
+```shell
+python3 -m tupper
 ```
 
 Optional arguments:
