@@ -3,3 +3,5 @@
 .vscode
 __pycache__
 htmlcov
+dist
+*.egg-info

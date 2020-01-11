@@ -4,7 +4,7 @@ import csv
 import os
 import unittest
 
-from solver import Solver
+from tupper.solver import Solver
 
 
 class SolverTestCase(unittest.TestCase):
@@ -13,10 +13,15 @@ class SolverTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.solver = Solver()
+        this_dir = os.path.dirname(os.path.realpath(__file__))
+        cls.data_dir = os.path.join(this_dir, "test_data")
 
     def test_samples(self):
-        for filename in os.listdir("test_data"):
-            self._test_file(os.path.join("test_data", filename))
+        for filename in os.listdir(self.data_dir):
+            filename = os.path.join(self.data_dir, filename)
+            if not str.endswith(filename, ".csv"):
+                continue
+            self._test_file(filename)
 
     def _test_file(self, filename):
         with open(filename) as test_data:

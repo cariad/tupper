@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 
-from solver import Solver
+from tupper.solver import Solver
 
-import constants
+import tupper.constants
 
 
 class ConsolePlotter:
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     parser = ArgumentParser("Plots Tupper's Self-Referential Formula.")
     parser.add_argument("--k",
                         type=int,
-                        default=constants.k,
+                        default=tupper.constants.k,
                         help="the value k to plot (defaults to magic)")
 
     parser.add_argument("--true",
