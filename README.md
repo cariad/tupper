@@ -37,8 +37,9 @@ which is **super cool**.
         ███                 █ ███  ███                                                               █ ███
 ```
 
-There's an awesome video about the formula here:
-https://www.youtube.com/watch?v=_s5RFgd59ao
+I've written about the formula and this project at [Tupper’s Self-Referential Formula in Python](https://cariad.io/tupper/).
+
+The video that influenced this whole thing is here: https://www.youtube.com/watch?v=_s5RFgd59ao
 
 ## Requirements
 

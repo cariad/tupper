@@ -1,4 +1,6 @@
 import csv
+import math
+
 from decimal import Decimal, getcontext
 
 
@@ -7,7 +9,8 @@ class Solver:
 
     def __init__(self, export_filename=None):
         self.export_filename = export_filename
-        getcontext().prec = 1000
+        self.ctx = getcontext()
+        self.ctx.prec = 1000
 
     def export(self, x, y, result):
         """ Appends the result to a CSV file. """
@@ -17,8 +20,17 @@ class Solver:
 
     def solve(self, x, y):
         """ Solves the formula for (x, y). """
-        yd = Decimal(y)
-        res = ((yd // 17) * getcontext().power(2, -17 * x - yd % 17)) % 2 >= 1
+        fx = math.floor(x)
+        fy = math.floor(y)
+
+        exponent = (-17 * fx) - (fy % 17)
+        raised = self.ctx.power(2, exponent)
+        inner_rhs = (y // 17) * raised
+        mod_rhs = inner_rhs % 2
+        floor_rhs = math.floor(mod_rhs)
+        sol = 0.5 < floor_rhs
+
         if self.export_filename:
-            self.export(x, y, res)
-        return res
+            self.export(x, y, sol)
+
+        return sol
