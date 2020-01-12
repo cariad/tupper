@@ -1,4 +1,3 @@
-import csv
 import math
 
 from decimal import Decimal, getcontext
@@ -7,16 +6,9 @@ from decimal import Decimal, getcontext
 class Solver:
     """ Solves Tupper's Self-Referential Formula for any given (x, y). """
 
-    def __init__(self, export_filename=None):
-        self.export_filename = export_filename
+    def __init__(self):
         self.ctx = getcontext()
         self.ctx.prec = 1000
-
-    def export(self, x, y, result):
-        """ Appends the result to a CSV file. """
-        with open(self.export_filename, mode="a+") as export_file:
-            writer = csv.writer(export_file)
-            writer.writerow([x, y, result])
 
     def solve(self, x, y):
         """ Solves the formula for (x, y). """
@@ -28,9 +20,12 @@ class Solver:
         inner_rhs = (y // 17) * raised
         mod_rhs = inner_rhs % 2
         floor_rhs = math.floor(mod_rhs)
-        sol = 0.5 < floor_rhs
+        return 0.5 < floor_rhs
 
-        if self.export_filename:
-            self.export(x, y, sol)
+    def x(self):
+        for x in range(105, -1, -1):
+            yield x
 
-        return sol
+    def y(self, k):
+        for y in range(k, k+17):
+            yield y
