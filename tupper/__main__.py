@@ -1,27 +1,11 @@
 from argparse import ArgumentParser
 
+from tupper.console_plotter import ConsolePlotter
+from tupper.export_plotter import ExportPlotter
 from tupper.solver import Solver
 
+
 import tupper.constants
-
-
-class ConsolePlotter:
-    def __init__(self, k, true_plot, false_plot, export_filename=None):
-        self.k = k
-        self.true_plot = true_plot
-        self.false_plot = false_plot
-        self.export_filename = export_filename
-
-    def plot(self):
-        solver = Solver(self.export_filename)
-        for y in range(self.k, self.k+17):
-            for x in range(105, -1, -1):
-                if solver.solve(x, y):
-                    print(self.true_plot, end='')
-                else:
-                    print(self.false_plot, end='')
-            print()
-
 
 if __name__ == '__main__':
     parser = ArgumentParser("Plots Tupper's Self-Referential Formula.")
@@ -47,4 +31,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    ConsolePlotter(args.k, args.true, args.false, args.export).plot()
+    ConsolePlotter(args.true, args.false).plot(args.k)
+
+    if args.export:
+        print("Exporting...")
+        ep = ExportPlotter(filename=args.export)
+        ep.export(args.k)
